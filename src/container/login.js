@@ -8,7 +8,7 @@ import { Spinner } from 'reactstrap';
 import { toast ,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom";
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
     let history = useHistory();
@@ -36,12 +36,12 @@ toast.error("Please Fill The Empty Field First !", {
     const googleSignin =()=>{
         dispatch(applygoogleSignin(history));
     }
-    const componentClicked = () =>{
-        console.log('click')
-    }
-    const responseFacebook = (res) =>{
-        console.log('response', res)
-    }
+    // const componentClicked = () =>{
+    //     console.log('click')
+    // }
+    // const responseFacebook = (res) =>{
+    //     console.log('response', res)
+    // }
     return (
         <React.Fragment>
             <div className="container-fluid bg-wrapper">
@@ -80,12 +80,12 @@ toast.error("Please Fill The Empty Field First !", {
                                           <div className='row'>
                                                <div className='col-md-12 text-center'> 
                                                <button className='btn btn-primary w-100' onClick={googleSignin}><FontAwesomeIcon icon={faGoogle} className="font-18 mx-2" />Login With Google</button>
-                                                    <FacebookLogin className="w-100"
+                                                    {/* <FacebookLogin className="w-100"
     appId="510426036645808"
     autoLoad={true}
     fields="name,email,picture"
     onClick={componentClicked}
-    callback={responseFacebook} />
+    callback={responseFacebook} /> */}
                                                 </div>
                                            </div>
                                       </div>
