@@ -46,4 +46,4 @@ jobs:
 
       # Deploys to Surge
       - name: Deploy to surge
-        run: surge ./build login-signup-dashboard.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        run: surge ./build login-signup-dashboard-init.surge.sh --token ${{ secrets.SURGE_TOKEN }}
