@@ -39,8 +39,8 @@ toast.error("Please Fill The Empty Field First !", {
     const componentClicked = () =>{
         console.log('click')
     }
-    const responseFacebook = () =>{
-        console.log('response')
+    const responseFacebook = (res) =>{
+        console.log('response', res)
     }
     return (
         <React.Fragment>
