@@ -103,6 +103,7 @@ export function loginUser(email,password,setVisible){
 export function applygoogleSignin(history){
     return dispatch=>{
         var provider = new firebase.auth.GoogleAuthProvider();
+        // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
         firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
@@ -138,6 +139,9 @@ export function applygoogleSignin(history){
             console.log('user',user);
     // ...
   }).catch((error) => {
+      console.log('====================================');
+      console.log(error);
+      console.log('====================================');
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
