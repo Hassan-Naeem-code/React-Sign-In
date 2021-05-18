@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../Store/action/auth'
+import { loginUser,applygoogleSignin } from '../Store/action/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
+import {faFacebookSquare,faGoogle} from '@fortawesome/free-brands-svg-icons';
 import { Spinner } from 'reactstrap';
 import { toast ,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import FacebookLogin from 'react-facebook-login';
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+    let history = useHistory();
     const getState = useSelector(({ authenticateUser }) => { return authenticateUser.authenticateUser });
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
@@ -31,12 +32,9 @@ toast.error("Please Fill The Empty Field First !", {
         setEmail('');
         setPassword('');
     }
-    const componentClicked = () =>{
-        console.log('hello');
+    const googleSignin =()=>{
+        dispatch(applygoogleSignin(history));
     }
-    const responseFacebook = (response) => {
-        console.log(response);
-      }
     return (
         <React.Fragment>
             <div className="container-fluid bg-wrapper">
@@ -74,15 +72,16 @@ toast.error("Please Fill The Empty Field First !", {
                                           </div>
                                           <div className='row'>
                                                <div className='col-md-12 text-center'> 
+                                               <button className='btn btn-primary w-100' onClick={googleSignin}><FontAwesomeIcon icon={faGoogle} className="font-18 mx-2" />Login With Google</button>
                                                     {/* <button href="#" class="fb btn-yt text-center">
                                                     <FontAwesomeIcon icon={faFacebookSquare} style={{color: 'white',width:'18px'}}/> Login with Facebook
                                                     </button> */}
-                                                    <FacebookLogin className="w-100"
+                                                    {/* <FacebookLogin className="w-100"
     appId="1160191824418323"
     autoLoad={true}
     fields="name,email,picture"
     onClick={componentClicked}
-    callback={responseFacebook} />
+    callback={responseFacebook} /> */}
                                                 </div>
                                            </div>
                                       </div>

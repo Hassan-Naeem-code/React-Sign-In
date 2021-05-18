@@ -100,6 +100,56 @@ export function loginUser(email,password,setVisible){
     }
 }
 
+export function applygoogleSignin(history){
+    return dispatch=>{
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log('user',user);
+    console.log('user',user.displayName);
+    firebase.firestore().collection("users").add({
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid
+    })
+        .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            let userObj = {
+                name : user.displayName,
+                email : user.email,uid : user.uid
+            }
+            dispatch({
+                type:SIGNUP_USER,
+                payload: userObj
+            })
+            toast.success("Sign In Successfull!", {
+                position: toast.POSITION.TOP_RIGHT
+              });
+              history.push("/");
+            })
+            console.log('user',user);
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+
+    }
+}
 export function fetchUserData(uid){
     return async dispatch=>{
     let userFound = await firebase.firestore().collection('users').where('uid','==',uid).get();
